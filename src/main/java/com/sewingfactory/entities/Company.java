@@ -8,6 +8,13 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "companies")
 public class Company {
+
+    public Company(String name) {
+        this.name = name;
+    }
+
+    public Company() {}
+
     @Id   
     @GeneratedValue   
     private Long id;
@@ -28,5 +35,12 @@ public class Company {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String toString() {
+        return "Company {" +
+            "id: " + id + "," +
+            "name: " + name + "," +
+            "}";
     }
 }

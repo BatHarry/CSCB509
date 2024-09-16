@@ -1,4 +1,4 @@
-package com.sewingfactory.DAO;
+package com.sewingfactory.DAL;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -6,7 +6,7 @@ import org.hibernate.Transaction;
 import com.sewingfactory.configurations.SessionFactoryUtil;
 import com.sewingfactory.entities.LeatherDetail;
 
-public class LeatherDetailDAO {
+public class LeatherDetailDAL {
     public static void createLeatherDetail(LeatherDetail leatherDetail) {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();

@@ -1,29 +1,26 @@
-package com.sewingfactory.DAO;
+package com.sewingfactory.DAL;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import com.sewingfactory.configurations.SessionFactoryUtil;
-import com.sewingfactory.entities.Employee;
 
-public class EmployeeDAO {
-    public static void createEmployee(Employee employee) {
+import com.sewingfactory.configurations.SessionFactoryUtil;
+import com.sewingfactory.entities.Material;
+
+public class MaterialDAL {
+        public static void createLeatherDetail(Material material) {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.persist(employee);
+            session.persist(material);
             transaction.commit();
         }
     }
 
-    public static Employee getEmployeeById(Long id) {
+    public static Material getLeatherDetailById(Long id) {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.getTransaction();
-            Employee employee = session.byId(Employee.class).getReference(id);
+            Material material = session.byId(Material.class).getReference(id);
             transaction.commit();
-            return employee;
+            return material;
         }
-    }
-
-    public static void getStatisticsForEmployees() {
-        throw new Error("Not implemented");
     }
 }

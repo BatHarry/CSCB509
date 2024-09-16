@@ -1,4 +1,4 @@
-package com.sewingfactory.DAO;
+package com.sewingfactory.DAL;
 
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -6,7 +6,7 @@ import org.hibernate.Transaction;
 import com.sewingfactory.configurations.SessionFactoryUtil;
 import com.sewingfactory.entities.Company;
 
-public class CompanyDAO {
+public class CompanyDAL {
     public static void createCompany(Company company) {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             Transaction transaction = session.beginTransaction();
@@ -21,6 +21,7 @@ public class CompanyDAO {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             company = session.byId(Company.class).getReference(id);
+            System.out.println(company);
             transaction.commit();
         }
         return company;

@@ -11,23 +11,24 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class NavBarFactory {
-    public static VBox buildNavBar(HBox hbox) {
-        NavItem nav1 = new NavItem("Данни за фирма", hbox, new FirmScene());
-        NavItem nav2 = new NavItem("Служители", hbox, new AllEmployees());
-        NavItem nav3 = new NavItem("Продукти", hbox, new AllProducts());
-        NavItem nav4 = new NavItem("Склад", hbox, new Inventory());
-        NavItem nav5 = new NavItem("Продажба", hbox, new Sales());
-        NavItem nav6 = new NavItem("Отчети", hbox, new Reports());
-
+    public static VBox buildNavBar(
+        HBox hbox,
+        FirmScene fs,
+        AllEmployees al,
+        AllProducts ap,
+        Inventory i,
+        Sales s,
+        Reports r
+    ) {
         VBox navBar = new VBox(15);
         navBar.setStyle("-fx-padding: 16;");
         navBar.getChildren().addAll(
-            nav1,
-            nav2,
-            nav3,
-            nav4,
-            nav5,
-            nav6
+            new NavItem("Данни за фирма", hbox, fs),
+            new NavItem("Служители", hbox, al),
+            new NavItem("Продукти", hbox, ap),
+            new NavItem("Склад", hbox, i),
+            new NavItem("Продажба", hbox, s),
+            new NavItem("Отчети", hbox, r)
         );
         return navBar;
     }

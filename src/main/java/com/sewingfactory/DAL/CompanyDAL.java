@@ -27,6 +27,14 @@ public class CompanyDAL {
         return company;
     }
 
+    public static void upateCompany(Company company) {
+        try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            session.merge(company);
+            transaction.commit();
+        }
+    }
+
     public static void getCompanyIncome() {
         throw new Error("Not implemented");
     }

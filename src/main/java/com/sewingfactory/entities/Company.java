@@ -1,5 +1,6 @@
 package com.sewingfactory.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -9,8 +10,10 @@ import jakarta.persistence.Table;
 @Table(name = "companies")
 public class Company {
 
-    public Company(String name) {
+    public Company(String name, float juniorSalary, float seniorSalary) {
         this.name = name;
+        this.juniorSalary = juniorSalary;
+        this.seniorSalary = seniorSalary;
     }
 
     public Company() {}
@@ -20,6 +23,12 @@ public class Company {
     private Long id;
 
     private String name;
+
+    @Column(name = "junior_salary")
+    private float juniorSalary;
+
+    @Column(name = "senior_salary")
+    private float seniorSalary;
 
     public long getId() {
         return id;
@@ -37,10 +46,28 @@ public class Company {
         this.name = name;
     }
 
+    public float getJuniorSalary() {
+        return juniorSalary;
+    }
+
+    public void setJuniorSalary(float juniorSalary) {
+        this.juniorSalary = juniorSalary;
+    }
+
+    public float getSeniorSalary() {
+        return seniorSalary;
+    }
+
+    public void setSeniorSalary(float seniorSalary) {
+        this.seniorSalary = seniorSalary;
+    }
+
     public String toString() {
-        return "Company {" +
-            "id: " + id + "," +
-            "name: " + name + "," +
+        return "Company {\n" +
+            "id: " + id + ", \n" +
+            "name: " + name + ", \n" +
+            "juniorSalary: " + juniorSalary + ", \n" +
+            "seniorSalary: " + seniorSalary + ", \n" +
             "}";
     }
 }

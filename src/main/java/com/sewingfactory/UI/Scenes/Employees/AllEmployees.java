@@ -2,6 +2,7 @@ package com.sewingfactory.UI.Scenes.Employees;
 
 import java.util.List;
 
+import com.sewingfactory.DAL.EmployeeDAL;
 import com.sewingfactory.UI.Components.HeadLineFactory;
 import com.sewingfactory.UI.Scenes.BaseScene;
 import com.sewingfactory.entities.Employee;
@@ -9,26 +10,26 @@ import com.sewingfactory.entities.Employee;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
 public class AllEmployees extends BaseScene {
+    private CreateEmployee createEmployee;
+
     @SuppressWarnings("unchecked")
-    public AllEmployees() {
+    public AllEmployees(HBox parent) {
         super();
         Text headLine = HeadLineFactory.create("Всички служители");
         HBox tableContainer = new HBox(10);
 
-
-        List<Employee> employees = List.of(
-            new Employee("Gosho", "Blagoev", false),
-            new Employee("Gosho", "Blagoev", false),
-            new Employee("Gosho", "Blagoev", false)
-        );
+        List<Employee> employees = EmployeeDAL.getAllEmployees();
         ObservableList<Employee> employeesObservable = FXCollections.observableArrayList(employees);
+        this.createEmployee = new CreateEmployee(employeesObservable);
         TableView<Employee> table = new TableView<>();
         table.setItems(employeesObservable);
 
@@ -68,5 +69,13 @@ public class AllEmployees extends BaseScene {
             headLine,
             tableContainer
             );
+
+        createNewButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent e) {
+                parent.getChildren().remove(1);
+                parent.getChildren().add(AllEmployees.this.createEmployee);
+            }
+        });
     }
 }

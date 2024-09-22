@@ -21,7 +21,7 @@ public class Layout extends Scene{
         VBox navBar = NavBarFactory.buildNavBar(
             parent,
             fs,
-            new AllEmployees(),
+            new AllEmployees(parent),
             new AllProducts(),
             new Inventory(),
             new Sales(),

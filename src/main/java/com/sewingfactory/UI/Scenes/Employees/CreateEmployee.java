@@ -2,13 +2,19 @@ package com.sewingfactory.UI.Scenes.Employees;
 
 import com.sewingfactory.UI.Components.HeadLineFactory;
 import com.sewingfactory.UI.Scenes.BaseScene;
+import com.sewingfactory.entities.Employee;
+import com.sewingfactory.handlers.Employee.CreateNewEmployeeHandler;
 
+import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 
 public class CreateEmployee extends BaseScene {
-    public CreateEmployee() {
+    public CreateEmployee(ObservableList<Employee> employees) {
         super();
         Text headLine = HeadLineFactory.create("Добавяне на\nнов служител");
 
@@ -19,7 +25,12 @@ public class CreateEmployee extends BaseScene {
         TextField familyField = new TextField();
 
         Label experienceLabel = new Label("Опит:");
-        TextField experienceField = new TextField();
+        ChoiceBox<String> experienceField = new ChoiceBox<String>();
+        experienceField.getItems().addAll("Младши", "Опитен");
+
+        Button submit = new Button("Запиши");
+
+        submit.addEventHandler(MouseEvent.MOUSE_CLICKED, new CreateNewEmployeeHandler(nameField, familyField, experienceField, employees));
 
         this.getChildren().addAll(
             headLine, 
@@ -28,8 +39,8 @@ public class CreateEmployee extends BaseScene {
             familyLabel,
             familyField,
             experienceLabel,
-            experienceField
+            experienceField,
+            submit
             );
-
     }
 }

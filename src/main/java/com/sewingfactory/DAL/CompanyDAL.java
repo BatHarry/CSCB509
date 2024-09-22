@@ -21,7 +21,6 @@ public class CompanyDAL {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             company = session.byId(Company.class).getReference(id);
-            System.out.println(company);
             transaction.commit();
         }
         return company;

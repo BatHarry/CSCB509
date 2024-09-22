@@ -19,6 +19,8 @@ public class Employee {
         this.experienced = e;
     }
 
+    public Employee() {}
+
     @Id   
     @GeneratedValue   
     private Long id;

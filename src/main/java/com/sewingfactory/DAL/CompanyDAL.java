@@ -21,6 +21,9 @@ public class CompanyDAL {
         try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             company = session.byId(Company.class).getReference(id);
+
+            if(company.getId() != id) throw new Error("Not found"); 
+
             transaction.commit();
         }
         return company;

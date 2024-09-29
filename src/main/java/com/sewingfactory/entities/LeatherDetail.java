@@ -3,7 +3,6 @@ package com.sewingfactory.entities;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -11,11 +10,17 @@ import jakarta.persistence.Table;
 public class LeatherDetail {
     public LeatherDetail(
         String name,
-        float bp
+        Float bp,
+        Float lih,
+        Float pfm
     ) {
         this.name = name;
-        this.basePrice = bp;
+        this.base_price = bp;
+        this.labor_in_hours = lih;
+        this.price_for_materials = pfm;
     }
+
+    public LeatherDetail() {}
 
     @Id   
     @GeneratedValue   
@@ -23,13 +28,14 @@ public class LeatherDetail {
 
     private String name;
 
-    private Float basePrice;
+    private Float base_price;
 
-    // TODO add material
-    // TODO add employee
+    private Float labor_in_hours;
+
+    private Float price_for_materials;
     
-    @ManyToOne()
-    private Employee created_by;
+    // @ManyToOne()
+    // private Employee created_by;
 
     public long getId() {
         return id;
@@ -48,19 +54,27 @@ public class LeatherDetail {
     }
 
     public Float getBasePrice() {
-        return basePrice;
+        return base_price;
     }
 
     public void setBasePrice(Float price) {
-        this.basePrice = price;
+        this.base_price = price;
     }
 
-    public Employee getcreated_by() {
-        return created_by;
+    public Float getLaborInHours() {
+        return labor_in_hours;
     }
 
-    public void setcreated_by(Employee employee) {
-        this.created_by = employee;
+    public void setLaborInHours(Float labor_in_hours) {
+        this.labor_in_hours = labor_in_hours;
+    }
+
+    public Float getPriceForMaterials() {
+        return price_for_materials;
+    }
+
+    public void setPriceForMaterials(Float price_for_materials) {
+        this.price_for_materials = price_for_materials;
     }
 
     @Override
@@ -68,8 +82,7 @@ public class LeatherDetail {
         return "LeatherDetail{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", basePrice='" + basePrice + '\'' +
-                ", createdBy='" + created_by + '\'' +
+                ", basePrice='" + base_price + '\'' +
                 '}';
     }
 }

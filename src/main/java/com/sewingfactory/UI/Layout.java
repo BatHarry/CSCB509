@@ -22,7 +22,7 @@ public class Layout extends Scene{
             parent,
             fs,
             new AllEmployees(parent),
-            new AllProducts(),
+            new AllProducts(parent),
             new Inventory(),
             new Sales(),
             new Reports()

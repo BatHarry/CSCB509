@@ -2,6 +2,7 @@ package com.sewingfactory.UI.Scenes.Inventory;
 
 import java.util.List;
 
+import com.sewingfactory.DAL.LeatherDetailDAL;
 import com.sewingfactory.UI.Components.HeadLineFactory;
 import com.sewingfactory.UI.Scenes.BaseScene;
 import com.sewingfactory.entities.LeatherDetail;
@@ -23,9 +24,7 @@ public class IndividualItems extends BaseScene {
         Text headLine = HeadLineFactory.create("Индивидуални продукти\nна склад");
         HBox tableContainer = new HBox(10);
 
-        List<LeatherDetail> products = List.of(
-            new LeatherDetail("TEST Product", 0)
-        );
+        List<LeatherDetail> products = LeatherDetailDAL.getAllLeatherDetails();
         ObservableList<LeatherDetail> productsObservable = FXCollections.observableArrayList(products);
         TableView<LeatherDetail> table = new TableView<>();
         table.setItems(productsObservable);

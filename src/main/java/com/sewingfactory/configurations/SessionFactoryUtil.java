@@ -3,7 +3,8 @@ package com.sewingfactory.configurations;
 import com.sewingfactory.entities.Company;
 import com.sewingfactory.entities.Employee;
 import com.sewingfactory.entities.LeatherDetail;
-import com.sewingfactory.entities.Material;
+import com.sewingfactory.entities.ManufacturedLeatherDetail;
+
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.AvailableSettings;
@@ -27,9 +28,7 @@ public class SessionFactoryUtil {
             .addAnnotatedClass(Company.class)
             .addAnnotatedClass(Employee.class)
             .addAnnotatedClass(LeatherDetail.class)
-            .addAnnotatedClass(Material.class);
-
-
+            .addAnnotatedClass(ManufacturedLeatherDetail.class);
 
             ServiceRegistry serviceRegistry
                     = new StandardServiceRegistryBuilder()

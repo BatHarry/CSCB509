@@ -1,18 +1,24 @@
 package com.sewingfactory.UI.Scenes.Sales;
 
 import java.util.List;
+import javafx.util.Callback;
 
-import com.sewingfactory.DAL.LeatherDetailDAL;
+import com.sewingfactory.DAL.InventoryStats;
+import com.sewingfactory.DAL.ManufactureLeatherDetailDAL;
 import com.sewingfactory.UI.Components.HeadLineFactory;
 import com.sewingfactory.UI.Scenes.BaseScene;
-import com.sewingfactory.entities.LeatherDetail;
 
+import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
@@ -23,32 +29,49 @@ public class Sales extends BaseScene{
         Text headLine = HeadLineFactory.create("Направи продажба");
         HBox tableContainer = new HBox(10);
 
-        List<LeatherDetail> products = LeatherDetailDAL.getAllLeatherDetails();
-        ObservableList<LeatherDetail> productsObservable = FXCollections.observableArrayList(products);
-        TableView<LeatherDetail> table = new TableView<>();
+        List<InventoryStats> products = ManufactureLeatherDetailDAL.getManufacturedLeatherDetailsInventoryWithPrice();
+        ObservableList<InventoryStats> productsObservable = FXCollections.observableArrayList(products);
+        TableView<InventoryStats> table = new TableView<>();
         table.setItems(productsObservable);
 
-        TableColumn<LeatherDetail, String> firstNameCol = new TableColumn<>("Име");
-        firstNameCol.setCellValueFactory(
+        TableColumn<InventoryStats, String> productNameCol = new TableColumn<>("Име");
+        productNameCol.setCellValueFactory(
             product -> {
                 return new SimpleStringProperty(product.getValue().getName());
             }
         );
 
-        TableColumn<LeatherDetail, String> familyNameCol = new TableColumn<>("Цена");
-        familyNameCol.setCellValueFactory(
+        TableColumn<InventoryStats, Number> quantityCol = new TableColumn<>("Количество");
+        quantityCol.setCellValueFactory(
             product -> {
-                return new SimpleStringProperty(String.valueOf(product.getValue().getBasePrice()));
+                return new SimpleLongProperty(product.getValue().getCount());
             }
         );
 
-        Button createNewButton = new Button("Добави нов продукт");
+        TableColumn<InventoryStats, Number> priceCol = new TableColumn<>("Цена");
+        priceCol.setCellValueFactory(
+            product -> {
+                return new SimpleFloatProperty(product.getValue().getPrice());
+            }
+        );
 
-        tableContainer.getChildren().addAll(table, createNewButton);
+        TableColumn buyCol = new TableColumn<>("Опции");
+        buyCol.setCellFactory(
+            new Callback<TableColumn<Record, Boolean>, TableCell<Record, Boolean>>() {
+                @Override
+                public TableCell<Record, Boolean> call(TableColumn<Record, Boolean> p) {
+                    System.out.println(p.getUserData());
+                    return new ButtonCell();
+                }
+            });
+
+        tableContainer.getChildren().addAll(table);
 
         table.getColumns().setAll(
-            firstNameCol, 
-            familyNameCol
+            productNameCol, 
+            quantityCol,
+            priceCol,
+            buyCol
             );
 
         this.getChildren().addAll(
@@ -56,4 +79,27 @@ public class Sales extends BaseScene{
             tableContainer
         );
     }
+
+    private class ButtonCell extends TableCell<Record, Boolean> {
+        final Button cellButton = new Button("Продажба");
+        
+        ButtonCell(){
+            cellButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent e) {
+                    System.out.println(e);
+                }
+            });
+        }
+
+        //Display button if the row is not empty
+        @Override
+        protected void updateItem(Boolean t, boolean empty) {
+            super.updateItem(t, empty);
+            if(!empty){
+                setGraphic(cellButton);
+            }
+        }
+    }
+
 }

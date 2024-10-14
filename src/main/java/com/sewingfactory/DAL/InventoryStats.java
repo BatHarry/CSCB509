@@ -38,6 +38,6 @@ public class InventoryStats {
     
     @Override
     public String toString() {
-        return "InventoryStats [name=" + name + ", count=" + count + "]";
+        return "InventoryStats [name=" + name + ", count=" + count + ", price=" + price + "]";
     }
 }

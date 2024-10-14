@@ -21,7 +21,6 @@ public class Launcher extends Application {
             System.out.println("Blank company created");
         }
 
-        System.out.println(company);
         HBox hbox = new HBox(10);
         new Layout(stage, hbox, company);
     }

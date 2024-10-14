@@ -46,14 +46,14 @@ public class ManufactureLeatherDetailDAL {
                 .createNativeQuery("""
                     SELECT 
                         ld.name,
-                        ld.price,
+                        ld.base_price,
                         count(mfld.leather_detail_id) 
                     FROM 
                         manufactured_leather_details mfld
                     LEFT JOIN leather_details ld ON ld.id = mfld.leather_detail_id 
                     GROUP BY 
                         ld.name,
-                        ld.price""", 
+                        ld.base_price""", 
                     InventoryStats.class
                 )
                 .setTupleTransformer((tuple, aliases) -> {

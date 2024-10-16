@@ -90,4 +90,37 @@ public class ManufactureLeatherDetailDAL {
             return mlds;
         }
     }
+
+    public static Double[] getReport() {
+        try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
+            List<Double> incomeResults = session
+                .createNativeQuery("""
+                    SELECT 
+                        SUM(ld.base_price)
+                    FROM 
+                        manufactured_leather_details mfld
+                    LEFT JOIN leather_details ld ON ld.id = mfld.leather_detail_id 
+                    WHERE mfld.issold = true
+                    """, 
+                    Double.class
+                )
+                .getResultList();
+
+            List<Double> expensesResults = session
+                .createNativeQuery("""
+                    SELECT 
+                        SUM(mfld.price_for_manufacturing)
+                    FROM 
+                        manufactured_leather_details mfld
+                    """, 
+                    Double.class
+                )
+                .getResultList();
+
+            Double income = incomeResults.get(0);
+            Double expenses = expensesResults.get(0);
+            Double[] results = {income == null ? 0 : income, expenses == null ? 0 : expenses};
+            return results;
+        }
+    }
 }

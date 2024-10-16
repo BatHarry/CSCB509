@@ -1,8 +1,4 @@
 package com.sewingfactory.UI.Scenes.Inventory;
-
-import java.util.List;
-
-import com.sewingfactory.DAL.ManufactureLeatherDetailDAL;
 import com.sewingfactory.UI.Components.HeadLineFactory;
 import com.sewingfactory.UI.Scenes.BaseScene;
 import com.sewingfactory.utils.InventoryStats;

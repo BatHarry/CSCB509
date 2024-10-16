@@ -27,17 +27,20 @@ public class ManufactureLeatherDetailDAL {
             List<InventoryStats> results = session
                 .createNativeQuery("""
                     SELECT 
+                        ld.id,
                         ld.name, 
                         count(mfld.leather_detail_id) 
                     FROM 
                         manufactured_leather_details mfld
                     LEFT JOIN leather_details ld ON ld.id = mfld.leather_detail_id 
                     GROUP BY 
-                        ld.name""", 
+                        ld.id,
+                        ld.name
+                    """, 
                     InventoryStats.class
                 )
                 .setTupleTransformer((tuple, aliases) -> {
-                    return new InventoryStats((String)tuple[0], (Long)tuple[1]);
+                    return new InventoryStats((Long)tuple[0], (String)tuple[1], (Long)tuple[2]);
                 })
                 .getResultList();
             return results;

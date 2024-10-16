@@ -6,15 +6,10 @@ public class InventoryStats {
     private Long count;
     private Float price;
 
-    public InventoryStats(String name, Long count) {
+    public InventoryStats(Long id, String name, Long count) {
+        this.id = id;
         this.name = name;
         this.count = count;
-    }
-
-    public InventoryStats(String name, Float price, Long count) {
-        this.name = name;
-        this.count = count;
-        this.price = price;
     }
 
     public InventoryStats(Long id, String name, Float price, Long count) {
@@ -52,6 +47,6 @@ public class InventoryStats {
     
     @Override
     public String toString() {
-        return "InventoryStats [name=" + name + ", count=" + count + ", price=" + price + "]";
+        return "InventoryStats [id=" + id + ", name=" + name + ", count=" + count + ", price=" + price + "]";
     }
 }

@@ -63,7 +63,7 @@ public class Inventory extends BaseScene {
             @Override
             public void handle(MouseEvent e) {
                 parent.getChildren().remove(1);
-                parent.getChildren().add(new ProductCreation());
+                parent.getChildren().add(new ProductCreation(productsObservable, table));
             }
         });
     }

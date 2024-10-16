@@ -3,6 +3,7 @@ package com.sewingfactory.UI.Scenes.Inventory;
 import java.util.List;
 
 import com.sewingfactory.DAL.EmployeeDAL;
+import com.sewingfactory.DAL.InventoryStats;
 import com.sewingfactory.DAL.LeatherDetailDAL;
 import com.sewingfactory.UI.Components.HeadLineFactory;
 import com.sewingfactory.UI.Scenes.BaseScene;
@@ -10,15 +11,17 @@ import com.sewingfactory.entities.Employee;
 import com.sewingfactory.entities.LeatherDetail;
 import com.sewingfactory.handlers.Inventory.CreateNewManufacturedProduct;
 
+import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.util.StringConverter;
 
 public class ProductCreation extends BaseScene {
-    public ProductCreation() {
+    public ProductCreation(ObservableList<InventoryStats> productsObservable, TableView<InventoryStats> table) {
         super();
         Text headLine = HeadLineFactory.create("Създаване на\nпродукт");
 
@@ -69,6 +72,6 @@ public class ProductCreation extends BaseScene {
             submit
             );
 
-        submit.addEventHandler(MouseEvent.MOUSE_CLICKED, new CreateNewManufacturedProduct(employeeField, productField));
+        submit.addEventHandler(MouseEvent.MOUSE_CLICKED, new CreateNewManufacturedProduct(employeeField, productField, productsObservable, table));
     }
 }

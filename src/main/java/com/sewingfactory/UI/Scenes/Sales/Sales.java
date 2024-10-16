@@ -90,28 +90,21 @@ public class Sales extends BaseScene{
                     int index = getIndex();
                     InventoryStats currentItem = items.get(index);
 
-                    // Update Database
                     ManufactureLeatherDetailDAL.sellManufactoredLeatherDetail(currentItem.getId());
 
-                    // Update Local state
                     currentItem.setCount(currentItem.getCount() - 1);
                     items.set(index, currentItem);
-
-                    System.out.println(items);
                 }
             });
         }
 
-        //Display button if the row is not empty
         @Override
         protected void updateItem(Boolean t, boolean empty) {
             super.updateItem(t, empty);
 
             if (empty) {
-                // Clear the button or any graphic in the empty row
                 setGraphic(null);
             } else {
-                // Display the button if the row is not empty
                 setGraphic(cellButton);
             }
         }

@@ -24,6 +24,8 @@ public class SessionFactoryUtil {
             .setProperty(AvailableSettings.JAKARTA_JDBC_USER, "user")
             .setProperty(AvailableSettings.JAKARTA_JDBC_PASSWORD, "password")
             .setProperty(AvailableSettings.AUTOCOMMIT, "true")
+            .setProperty("hibernate.validator.apply_to_ddl", "true")
+            .setProperty("hibernate.validator.autoregister_listeners", "true")
             // .setProperty(AvailableSettings.JAKARTA_HBM2DDL_DATABASE_ACTION, Action.SPEC_ACTION_DROP_AND_CREATE)
             .addAnnotatedClass(Company.class)
             .addAnnotatedClass(Employee.class)

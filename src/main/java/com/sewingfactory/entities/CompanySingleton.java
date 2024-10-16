@@ -16,7 +16,7 @@ public class CompanySingleton {
             }catch (ObjectNotFoundException e) {
                 System.out.println("Company not found");
                 companyFromDB = new Company("", 0, 0);
-                CompanyDAL.createCompany(companyFromDB);
+                // CompanyDAL.createCompany(companyFromDB);
                 System.out.println("Blank company created");
             }
 

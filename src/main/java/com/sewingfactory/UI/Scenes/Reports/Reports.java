@@ -13,8 +13,6 @@ public class Reports extends BaseScene {
 
         if(report[0] == null || report[1] == null) throw new Error("Could not get reports");
 
-        System.out.println(report);
-
         Double profit = report[0] - report[1];
         Double tax = report[0] * 0.1;
         Double totalProfit = profit - tax;

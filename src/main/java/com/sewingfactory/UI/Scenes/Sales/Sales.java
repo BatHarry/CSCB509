@@ -55,12 +55,12 @@ public class Sales extends BaseScene{
             }
         );
 
+        @SuppressWarnings("rawtypes")
         TableColumn buyCol = new TableColumn<>("Опции");
         buyCol.setCellFactory(
-            new Callback<TableColumn<Record, Boolean>, TableCell<Record, Boolean>>() {
+            new Callback<TableColumn<InventoryStats, Boolean>, TableCell<InventoryStats, Boolean>>() {
                 @Override
-                public TableCell<Record, Boolean> call(TableColumn<Record, Boolean> p) {
-                    System.out.println(p.getUserData());
+                public TableCell<InventoryStats, Boolean> call(TableColumn<InventoryStats, Boolean> p) {
                     return new ButtonCell();
                 }
             });
@@ -80,14 +80,25 @@ public class Sales extends BaseScene{
         );
     }
 
-    private class ButtonCell extends TableCell<Record, Boolean> {
+    private class ButtonCell extends TableCell<InventoryStats, Boolean> {
         final Button cellButton = new Button("Продажба");
         
         ButtonCell(){
             cellButton.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent e) {
-                    System.out.println(e);
+                    ObservableList<InventoryStats> items = getTableView().getItems();
+                    int index = getIndex();
+                    InventoryStats currentItem = items.get(index);
+
+                    // Update Database
+                    ManufactureLeatherDetailDAL.sellManufactoredLeatherDetail(currentItem.getId());
+
+                    // Update Local state
+                    currentItem.setCount(currentItem.getCount() - 1);
+                    items.set(index, currentItem);
+
+                    System.out.println(items);
                 }
             });
         }
@@ -96,7 +107,12 @@ public class Sales extends BaseScene{
         @Override
         protected void updateItem(Boolean t, boolean empty) {
             super.updateItem(t, empty);
-            if(!empty){
+
+            if (empty) {
+                // Clear the button or any graphic in the empty row
+                setGraphic(null);
+            } else {
+                // Display the button if the row is not empty
                 setGraphic(cellButton);
             }
         }

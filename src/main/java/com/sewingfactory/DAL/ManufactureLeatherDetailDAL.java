@@ -8,6 +8,10 @@ import org.hibernate.Transaction;
 import com.sewingfactory.configurations.SessionFactoryUtil;
 import com.sewingfactory.entities.ManufacturedLeatherDetail;
 
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
+
 public class ManufactureLeatherDetailDAL {
 
     public static void createManufactureLeatherDetailDAL(ManufacturedLeatherDetail manufacturedLeatherDetail) {
@@ -45,22 +49,45 @@ public class ManufactureLeatherDetailDAL {
             List<InventoryStats> results = session
                 .createNativeQuery("""
                     SELECT 
+                        ld.id,
                         ld.name,
                         ld.base_price,
                         count(mfld.leather_detail_id) 
                     FROM 
                         manufactured_leather_details mfld
                     LEFT JOIN leather_details ld ON ld.id = mfld.leather_detail_id 
+                    WHERE mfld.issold = false
                     GROUP BY 
+                        ld.id,
                         ld.name,
                         ld.base_price""", 
                     InventoryStats.class
                 )
                 .setTupleTransformer((tuple, aliases) -> {
-                    return new InventoryStats((String)tuple[0], (Float)tuple[1], (Long)tuple[2]);
+                    return new InventoryStats((Long)tuple[0], (String)tuple[1], (Float)tuple[2], (Long)tuple[3]);
                 })
                 .getResultList();
             return results;
+        }
+    }
+
+    public static List<ManufacturedLeatherDetail> sellManufactoredLeatherDetail(Long ldId) {
+        try (Session session = SessionFactoryUtil.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+            CriteriaBuilder builder = session.getCriteriaBuilder();
+            CriteriaQuery<ManufacturedLeatherDetail> query = builder.createQuery(ManufacturedLeatherDetail.class);
+            Root<ManufacturedLeatherDetail> mldrRoot = query.from(ManufacturedLeatherDetail.class);
+
+            query.select(mldrRoot)
+                .where(builder.equal(mldrRoot.get("leather_detail").get("id"), ldId));
+
+            List<ManufacturedLeatherDetail> mlds = session.createQuery(query).getResultList();
+            ManufacturedLeatherDetail toBeSold = mlds.get(0);
+            toBeSold.setIsSold(true);
+
+            transaction.commit();
+
+            return mlds;
         }
     }
 }

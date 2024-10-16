@@ -1,7 +1,5 @@
 package com.sewingfactory.handlers.Inventory;
 
-import java.util.Optional;
-
 import com.sewingfactory.DAL.ManufactureLeatherDetailDAL;
 import com.sewingfactory.entities.Employee;
 import com.sewingfactory.entities.LeatherDetail;

@@ -7,6 +7,7 @@ import com.sewingfactory.UI.Components.HeadLineFactory;
 import com.sewingfactory.UI.Scenes.BaseScene;
 import com.sewingfactory.entities.LeatherDetail;
 
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -43,7 +44,7 @@ public class AllProducts extends BaseScene {
         TableColumn<LeatherDetail, Number> priceCol = new TableColumn<>("Цена");
         priceCol.setCellValueFactory(
             product -> {
-                return new SimpleFloatProperty(product.getValue().getBasePrice());
+                return new SimpleDoubleProperty(product.getValue().getBasePrice());
             }
         );
 

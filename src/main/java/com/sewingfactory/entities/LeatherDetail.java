@@ -10,7 +10,7 @@ import jakarta.persistence.Table;
 public class LeatherDetail {
     public LeatherDetail(
         String name,
-        Float bp,
+        Double bp,
         Float lih,
         Float pfm
     ) {
@@ -28,7 +28,7 @@ public class LeatherDetail {
 
     private String name;
 
-    private Float base_price;
+    private Double base_price;
 
     private Float labor_in_hours;
 
@@ -53,11 +53,11 @@ public class LeatherDetail {
         this.name = name;
     }
 
-    public Float getBasePrice() {
+    public Double getBasePrice() {
         return base_price;
     }
 
-    public void setBasePrice(Float price) {
+    public void setBasePrice(Double price) {
         this.base_price = price;
     }
 

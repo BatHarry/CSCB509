@@ -14,7 +14,8 @@ public class ManufacturedLeatherDetail {
         this.created_by = e;
         this.leather_detail = ld;
         Company c = CompanySingleton.getCompany();
-        float laborCost = (e.getExperienced() ? c.getSeniorSalary() : c.getJuniorSalary()) * ld.getLaborInHours();
+        double experiencePenalty = e.getExperienced() ? 1 : 2.5;
+        double laborCost = (e.getExperienced() ? c.getSeniorSalary() : c.getJuniorSalary()) * ld.getLaborInHours() * experiencePenalty;
         this.price_for_manufacturing = laborCost + ld.getPriceForMaterials();
     }
 
@@ -30,7 +31,7 @@ public class ManufacturedLeatherDetail {
     @ManyToOne()
     private LeatherDetail leather_detail;
 
-    private float price_for_manufacturing;
+    private double price_for_manufacturing;
 
     private boolean isSold;
 
@@ -66,12 +67,30 @@ public class ManufacturedLeatherDetail {
         this.isSold = isSold;
     }
 
-    public float getPriceForManufacturing() {
+    public double getPriceForManufacturing() {
         return price_for_manufacturing;
     }
 
     public void setPriceForManufacturing(float priceForManufactoring) {
         this.price_for_manufacturing = priceForManufactoring;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true; 
+        if (o == null || getClass() != o.getClass()) return false; 
+    
+        ManufacturedLeatherDetail that = (ManufacturedLeatherDetail) o;
+    
+        if (this.leather_detail == null || that.leather_detail == null) return false;
+        
+        return this.leather_detail.getId() == that.leather_detail.getId();
+    }
+    
+    @Override
+    public int hashCode() {
+        // Hash code based on leather_detail's ID
+        return leather_detail != null ? (int) leather_detail.getId() : 0;
     }
 
     @Override

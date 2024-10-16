@@ -28,9 +28,9 @@ public class CreateProductHandler implements EventHandler<MouseEvent>{
     public void handle(MouseEvent e) {
         LeatherDetail product = new LeatherDetail(
             this.nameInput.getText(),
-            Float.parseFloat(this.basePrice.getText()),
-            Float.parseFloat(this.costOfMaterials.getText()),
-            Float.parseFloat(this.laborInHours.getText())
+            Double.parseDouble(this.basePrice.getText()),
+            Float.parseFloat(this.laborInHours.getText()),
+            Float.parseFloat(this.costOfMaterials.getText())
         );
 
         this.products.add(product);

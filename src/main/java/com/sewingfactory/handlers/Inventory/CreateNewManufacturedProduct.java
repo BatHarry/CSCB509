@@ -40,15 +40,6 @@ public class CreateNewManufacturedProduct implements EventHandler<MouseEvent> {
                 p.setCount(p.getCount()  + 1);
             }
         });
-        
-        // InventoryStats filtered = productsObservable.filtered(p -> {
-        //         return p.getId() == ld.getId();
-        //     }
-        // ).get(0);
-        // System.out.println(filtered);
-        // filtered.setCount(filtered.getCount() + 1);
-
-        // productsObservable.set(0, filtered);
 
         table.refresh();
         ManufacturedLeatherDetail mld = new ManufacturedLeatherDetail(employee, ld);

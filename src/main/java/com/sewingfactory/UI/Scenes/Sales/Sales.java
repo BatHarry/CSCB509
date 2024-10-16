@@ -22,7 +22,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
-// TODO Select multiple rows and mark them as sold when clicking the sale button
 public class Sales extends BaseScene{
     @SuppressWarnings("unchecked")
     public Sales() {

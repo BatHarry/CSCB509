@@ -1,7 +1,7 @@
 package com.sewingfactory;
-import com.sewingfactory.DAL.CompanyDAL;
 import com.sewingfactory.UI.Layout;
 import com.sewingfactory.entities.Company;
+import com.sewingfactory.entities.CompanySingleton;
 
 import javafx.application.Application;
 import javafx.scene.layout.HBox;
@@ -11,15 +11,7 @@ public class Launcher extends Application {
 
     @Override
     public void start(Stage stage) {
-        Company company;
-        try {
-            company = CompanyDAL.getCompanyById(1);
-        } catch (Exception e) {
-            System.out.println("Company not found");
-            company = new Company("", 0, 0);
-            CompanyDAL.createCompany(company);
-            System.out.println("Blank company created");
-        }
+        Company company = CompanySingleton.getCompany();
 
         HBox hbox = new HBox(10);
         new Layout(stage, hbox, company);

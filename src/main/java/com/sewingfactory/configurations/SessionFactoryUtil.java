@@ -10,7 +10,7 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
-// import org.hibernate.tool.schema.Action;
+import org.hibernate.tool.schema.Action;
 
 public class SessionFactoryUtil {
 
@@ -24,7 +24,7 @@ public class SessionFactoryUtil {
             .setProperty(AvailableSettings.JAKARTA_JDBC_USER, "user")
             .setProperty(AvailableSettings.JAKARTA_JDBC_PASSWORD, "password")
             .setProperty(AvailableSettings.AUTOCOMMIT, "true")
-            // .setProperty(AvailableSettings.JAKARTA_HBM2DDL_DATABASE_ACTION, Action.SPEC_ACTION_DROP_AND_CREATE)
+            .setProperty(AvailableSettings.JAKARTA_HBM2DDL_DATABASE_ACTION, Action.SPEC_ACTION_DROP_AND_CREATE)
             .addAnnotatedClass(Company.class)
             .addAnnotatedClass(Employee.class)
             .addAnnotatedClass(LeatherDetail.class)

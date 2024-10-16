@@ -13,6 +13,9 @@ public class ManufacturedLeatherDetail {
     public ManufacturedLeatherDetail(Employee e, LeatherDetail ld) {
         this.created_by = e;
         this.leather_detail = ld;
+        Company c = CompanySingleton.getCompany();
+        float laborCost = (e.getExperienced() ? c.getSeniorSalary() : c.getJuniorSalary()) * ld.getLaborInHours();
+        this.price_for_manufacturing = laborCost + ld.getPriceForMaterials();
     }
 
     public ManufacturedLeatherDetail() {}

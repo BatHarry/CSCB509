@@ -1,4 +1,4 @@
-package com.sewingfactory.configurations;
+package com.sewingfactory.utils;
 
 public class ValidationResponse {
     private boolean hasError;

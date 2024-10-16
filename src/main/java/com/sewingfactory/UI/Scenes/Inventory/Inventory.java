@@ -2,10 +2,10 @@ package com.sewingfactory.UI.Scenes.Inventory;
 
 import java.util.List;
 
-import com.sewingfactory.DAL.InventoryStats;
 import com.sewingfactory.DAL.ManufactureLeatherDetailDAL;
 import com.sewingfactory.UI.Components.HeadLineFactory;
 import com.sewingfactory.UI.Scenes.BaseScene;
+import com.sewingfactory.utils.InventoryStats;
 
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -22,12 +22,10 @@ import javafx.scene.text.Text;
 // TODO For every product type there should be a quantity + price
 public class Inventory extends BaseScene {
     @SuppressWarnings("unchecked")
-    public Inventory(HBox parent) {
+    public Inventory(HBox parent, ObservableList<InventoryStats> productsObservable) {
         super();
         Text headLine = HeadLineFactory.create("Наличности");
         HBox tableContainer = new HBox(10);
-        List<InventoryStats> products = ManufactureLeatherDetailDAL.getManufacturedLeatherDetailsInventory();
-        ObservableList<InventoryStats> productsObservable = FXCollections.observableArrayList(products);
         TableView<InventoryStats> table = new TableView<>();
         table.setItems(productsObservable);
 

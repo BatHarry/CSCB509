@@ -7,6 +7,7 @@ import org.hibernate.Transaction;
 
 import com.sewingfactory.configurations.SessionFactoryUtil;
 import com.sewingfactory.entities.ManufacturedLeatherDetail;
+import com.sewingfactory.utils.InventoryStats;
 
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -67,7 +68,7 @@ public class ManufactureLeatherDetailDAL {
                     InventoryStats.class
                 )
                 .setTupleTransformer((tuple, aliases) -> {
-                    return new InventoryStats((Long)tuple[0], (String)tuple[1], (Float)tuple[2], (Long)tuple[3]);
+                    return new InventoryStats((Long)tuple[0], (String)tuple[1], (Double)tuple[2], (Long)tuple[3]);
                 })
                 .getResultList();
             return results;

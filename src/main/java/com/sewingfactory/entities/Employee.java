@@ -3,12 +3,15 @@ package com.sewingfactory.entities;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.validator.constraints.Length;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "employees")
@@ -30,8 +33,12 @@ public class Employee {
     @GeneratedValue   
     private Long id;
 
+    @NotBlank(message = "Името на служител не може да е празно")
+    @Length(min = 2, max = 20, message = "Необходимия брой символи за име на служител е между 2 и 20")
     private String first_name;
 
+    @NotBlank(message = "Фамилията на служител не може да е празна")
+    @Length(min = 2, max = 20, message = "Необходимия брой символи за фамилия на служител е между 2 и 20")
     private String last_name;
 
     private Boolean experienced;

@@ -1,8 +1,9 @@
-package com.sewingfactory.entities;
+package com.sewingfactory.utils;
 
 import org.hibernate.ObjectNotFoundException;
 
 import com.sewingfactory.DAL.CompanyDAL;
+import com.sewingfactory.entities.Company;
 
 public class CompanySingleton {
     private static Company company;

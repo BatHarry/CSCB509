@@ -1,10 +1,14 @@
-package com.sewingfactory.DAL;
+package com.sewingfactory.utils;
 
 public class InventoryStats {
     private Long id;
     private String name;
     private Long count;
-    private Float price;
+    private Double price;
+
+    public InventoryStats(Long id) {
+        this.id = id;
+    }
 
     public InventoryStats(Long id, String name, Long count) {
         this.id = id;
@@ -12,14 +16,14 @@ public class InventoryStats {
         this.count = count;
     }
 
-    public InventoryStats(Long id, String name, Float price, Long count) {
+    public InventoryStats(Long id, String name, Double price, Long count) {
         this.id = id;
         this.name = name;
         this.count = count;
         this.price = price;
     }
 
-    public Float getPrice() {
+    public Double getPrice() {
         return price;
     }
     public String getName() {
@@ -41,8 +45,25 @@ public class InventoryStats {
     public void setCount(Long count) {
         this.count = count;
     }
-    public void setPrice(Float price) {
+    public void setPrice(Double price) {
         this.price = price;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true; 
+        if (o == null || getClass() != o.getClass()) return false; 
+    
+        InventoryStats that = (InventoryStats) o;
+    
+        if (this.id == null || that.id == null) return false;
+        
+        return this.id == that.id;
+    }
+    
+    @Override
+    public int hashCode() {
+        return id != null ? id.intValue() : 0;
     }
     
     @Override

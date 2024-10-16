@@ -3,11 +3,12 @@ package com.sewingfactory.UI.Scenes.Sales;
 import java.util.List;
 import javafx.util.Callback;
 
-import com.sewingfactory.DAL.InventoryStats;
 import com.sewingfactory.DAL.ManufactureLeatherDetailDAL;
 import com.sewingfactory.UI.Components.HeadLineFactory;
 import com.sewingfactory.UI.Scenes.BaseScene;
+import com.sewingfactory.utils.InventoryStats;
 
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -24,12 +25,10 @@ import javafx.scene.text.Text;
 
 public class Sales extends BaseScene{
     @SuppressWarnings("unchecked")
-    public Sales() {
+    public Sales(ObservableList<InventoryStats> productsObservable) {
         Text headLine = HeadLineFactory.create("Направи продажба");
         HBox tableContainer = new HBox(10);
 
-        List<InventoryStats> products = ManufactureLeatherDetailDAL.getManufacturedLeatherDetailsInventoryWithPrice();
-        ObservableList<InventoryStats> productsObservable = FXCollections.observableArrayList(products);
         TableView<InventoryStats> table = new TableView<>();
         table.setItems(productsObservable);
 
@@ -50,7 +49,7 @@ public class Sales extends BaseScene{
         TableColumn<InventoryStats, Number> priceCol = new TableColumn<>("Цена");
         priceCol.setCellValueFactory(
             product -> {
-                return new SimpleFloatProperty(product.getValue().getPrice());
+                return new SimpleDoubleProperty(product.getValue().getPrice());
             }
         );
 
@@ -89,6 +88,8 @@ public class Sales extends BaseScene{
                     ObservableList<InventoryStats> items = getTableView().getItems();
                     int index = getIndex();
                     InventoryStats currentItem = items.get(index);
+
+                    if(currentItem.getCount() == 0) return;
 
                     ManufactureLeatherDetailDAL.sellManufactoredLeatherDetail(currentItem.getId());
 

@@ -3,13 +3,13 @@ package com.sewingfactory.UI.Scenes.Inventory;
 import java.util.List;
 
 import com.sewingfactory.DAL.EmployeeDAL;
-import com.sewingfactory.DAL.InventoryStats;
 import com.sewingfactory.DAL.LeatherDetailDAL;
 import com.sewingfactory.UI.Components.HeadLineFactory;
 import com.sewingfactory.UI.Scenes.BaseScene;
 import com.sewingfactory.entities.Employee;
 import com.sewingfactory.entities.LeatherDetail;
 import com.sewingfactory.handlers.Inventory.CreateNewManufacturedProduct;
+import com.sewingfactory.utils.InventoryStats;
 
 import javafx.collections.ObservableList;
 import javafx.scene.control.Button;

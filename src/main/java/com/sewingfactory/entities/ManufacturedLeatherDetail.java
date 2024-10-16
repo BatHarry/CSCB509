@@ -1,5 +1,7 @@
 package com.sewingfactory.entities;
 
+import com.sewingfactory.utils.CompanySingleton;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -89,7 +91,6 @@ public class ManufacturedLeatherDetail {
     
     @Override
     public int hashCode() {
-        // Hash code based on leather_detail's ID
         return leather_detail != null ? (int) leather_detail.getId() : 0;
     }
 

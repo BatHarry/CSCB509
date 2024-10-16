@@ -1,7 +1,7 @@
 package com.sewingfactory;
 import com.sewingfactory.UI.Layout;
 import com.sewingfactory.entities.Company;
-import com.sewingfactory.entities.CompanySingleton;
+import com.sewingfactory.utils.CompanySingleton;
 
 import javafx.application.Application;
 import javafx.scene.layout.HBox;

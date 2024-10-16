@@ -14,7 +14,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Text;
 
-// TODO For every product type there should be a quantity + price
 public class Inventory extends BaseScene {
     @SuppressWarnings("unchecked")
     public Inventory(HBox parent, ObservableList<InventoryStats> productsObservable) {

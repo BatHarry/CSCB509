@@ -1,11 +1,12 @@
 package com.sewingfactory.UI.Components;
 
+import com.sewingfactory.UI.Scenes.BaseScene;
+
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
@@ -14,7 +15,7 @@ import javafx.scene.text.TextAlignment;
 
 
 public class NavItem extends Group{
-    public NavItem(String t, HBox layout, VBox page){
+    public NavItem(String t, HBox layout, BaseScene page){
         super();
         Rectangle r = new Rectangle();
         r.setX(0);
@@ -44,6 +45,7 @@ public class NavItem extends Group{
         this.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
+                page.refresh();
                 layout.getChildren().remove(1);
                 layout.getChildren().add(page);
             }

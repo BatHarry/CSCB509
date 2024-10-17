@@ -72,6 +72,6 @@ public class ProductCreation extends BaseScene {
             submit
             );
 
-        submit.addEventHandler(MouseEvent.MOUSE_CLICKED, new CreateNewManufacturedProduct(employeeField, productField, productsObservable, table));
+        submit.addEventHandler(MouseEvent.MOUSE_CLICKED, new CreateNewManufacturedProduct(employeeField, productField, productsObservable));
     }
 }

@@ -7,4 +7,6 @@ public abstract class BaseScene extends VBox {
         super();
         this.setSpacing(10);
     }
+
+    public void refresh() {};
 }

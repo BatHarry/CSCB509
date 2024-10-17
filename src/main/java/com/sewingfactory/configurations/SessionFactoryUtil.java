@@ -26,7 +26,7 @@ public class SessionFactoryUtil {
             .setProperty(AvailableSettings.AUTOCOMMIT, "true")
             .setProperty("hibernate.validator.apply_to_ddl", "true")
             .setProperty("hibernate.validator.autoregister_listeners", "true")
-            .setProperty(AvailableSettings.JAKARTA_HBM2DDL_DATABASE_ACTION, Action.SPEC_ACTION_DROP_AND_CREATE)
+            // .setProperty(AvailableSettings.JAKARTA_HBM2DDL_DATABASE_ACTION, Action.SPEC_ACTION_DROP_AND_CREATE)
             .addAnnotatedClass(Company.class)
             .addAnnotatedClass(Employee.class)
             .addAnnotatedClass(LeatherDetail.class)
